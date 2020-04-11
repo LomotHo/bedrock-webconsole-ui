@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Console from '../views/Console.vue'
 import WhiteList from '../views/WhiteList.vue'
+import Api from '../views/Api.vue'
 
 Vue.use(VueRouter)
 
@@ -23,6 +24,11 @@ Vue.use(VueRouter)
     path: '/whitelist',
     name: 'WhiteList',
     component: WhiteList
+  },
+  {
+    path: '/api',
+    name: 'Api',
+    component: Api
   },
   {
     path: '/about',

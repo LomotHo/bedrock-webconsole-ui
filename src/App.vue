@@ -15,6 +15,10 @@
         <i class="el-icon-s-platform"></i>
         <span slot="title">控制台</span>
       </el-menu-item>
+      <el-menu-item index="api">
+        <i class="el-icon-upload2"></i>
+        <span slot="title">http接口</span>
+      </el-menu-item>
       <el-menu-item index="whitelist">
         <i class="el-icon-s-order"></i>
         <span slot="title">白名单</span>
