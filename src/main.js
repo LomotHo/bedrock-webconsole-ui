@@ -1,8 +1,24 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
+import axios from 'axios'
+import ElementUI from 'element-ui' // 引入element-ui
+import 'element-ui/lib/theme-chalk/index.css'
+import config from "../config"
+import VueSocketIO from 'vue-socket.io'
 
+
+Vue.prototype.customConfig = config
+Vue.prototype.$http = axios
 Vue.config.productionTip = false
+Vue.use(ElementUI)
+Vue.use(new VueSocketIO({
+  debug: false,
+  connection: config.serverUrl,
+  vuex: {
+  }
+}))
+
 
 new Vue({
   router,

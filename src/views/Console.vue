@@ -9,7 +9,7 @@
 import WebConsole from '@/components/WebConsole.vue'
 
 export default {
-  name: 'Home',
+  name: 'console',
   components: {
     "web-console": WebConsole
   }
