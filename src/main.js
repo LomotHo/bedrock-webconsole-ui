@@ -7,6 +7,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 import config from "../config"
 import VueSocketIO from 'vue-socket.io'
 
+config.serverUrl = window.location.host;
 
 Vue.prototype.customConfig = config
 Vue.prototype.$http = axios
