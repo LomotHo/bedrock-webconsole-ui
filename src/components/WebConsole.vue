@@ -1,27 +1,17 @@
 <template>
   <div>
-    <!-- <el-row>
-      <el-col :span="20" :offset="2"> -->
-        <div class="web-console">
-          <ul id="webconsole" class="console-text">
-            <p class="item" v-for="webConsoleLogItem in webConsoleLog" >
-              {{webConsoleLogItem}}
-            </p>
-          </ul>
-        </div>
-      <!-- </el-col>
-    </el-row> -->
+    <div class="web-console">
+      <ul id="webconsole" class="console-text">
+        <p class="item" v-for="webConsoleLogItem in webConsoleLog" >
+          {{webConsoleLogItem}}
+        </p>
+      </ul>
+    </div>
 
-    <!-- <el-row>
-      <el-col :span="20" :offset="2"> -->
+    <el-input placeholder="输入命令" v-model="webConsoleInput"  @keyup.enter.native="onSubmicCmd()" @keyup.up.native="lastInput()" @keyup.down.native="nextInput()" class="web-console-input">
+      <el-button slot="append" @click="onSubmicCmd()">Enter</el-button>
+    </el-input>
 
-        <el-input placeholder="输入命令" v-model="webConsoleInput"  @keyup.enter.native="onSubmicCmd()" class="web-console-input">
-          <el-button slot="append" @click="onSubmicCmd()">Enter</el-button>
-        </el-input>
-
-      <!-- </el-col>
-    </el-row> -->
-    
   </div>
 </template>
 
@@ -41,7 +31,8 @@ export default {
     var webConsoleLog = []
     return {
       webConsoleInput: '',
-      webConsoleLog
+      webConsoleLog,
+      lastInputStr: ''
     }
   },
   destroyed () {
@@ -53,6 +44,7 @@ export default {
       if(this.webConsoleInput!=''){
         console.log(`webConsoleInput: ${this.webConsoleInput}`);
         this.$socket.emit('cmd', { cmd: this.webConsoleInput});
+        this.lastInputStr = this.webConsoleInput;
         this.webConsoleLog.push(`=> ${this.webConsoleInput}`);
         this.webConsoleInput = '';
         this.$nextTick(function() {
@@ -60,7 +52,13 @@ export default {
         })
       }
     },
-    consoleScrollEnd(){
+    lastInput() {
+      this.webConsoleInput = this.lastInputStr;
+    },
+    nextInput() {
+      this.webConsoleInput = '';
+    },
+    consoleScrollEnd() {
       document.getElementById("webconsole").scrollTop=100000;
     }
   }
@@ -81,7 +79,7 @@ export default {
     background-color: rgb(38, 50, 56);
     color: gainsboro;
     font-family: 'DejaVu Sans Mono', 'Everson Mono', FreeMono, Menlo, Terminal, monospace;
-    
+
     // windows
     padding: 4px 8px;
     border-style: solid;

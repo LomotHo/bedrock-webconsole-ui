@@ -16,6 +16,7 @@ Vue.use(ElementUI)
 Vue.use(new VueSocketIO({
   debug: false,
   connection: config.serverUrl,
+  // connection: "192.168.8.30:3000",
   vuex: {
   }
 }))
